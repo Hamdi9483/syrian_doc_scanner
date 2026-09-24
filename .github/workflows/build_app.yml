@@ -23,12 +23,10 @@ jobs:
         with:
           flutter-version: '3.19.x'
 
-      - name: Force Recreate Android Platform Files
-        run: |
-          flutter create . --platforms=android --org=com.example.syriandoc --overwrite
-
       - name: Add Camera Permissions to AndroidManifest
         run: |
+          mkdir -p android/app/src/main
+          flutter create . --platforms=android --org=com.example.syriandoc --overwrite
           sed -i '/<application/i \    <uses-permission android:name="android.permission.CAMERA"/>\n    <uses-feature android:name="android.hardware.camera" />\n    <uses-feature android:name="android.hardware.camera.autofocus" />' android/app/src/main/AndroidManifest.xml
 
       - name: Install Dependencies
